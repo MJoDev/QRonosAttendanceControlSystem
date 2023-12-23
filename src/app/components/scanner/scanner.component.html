@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row" data-bs-theme="dark">
+    <div class="col-4">
+      <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
+      </div>
+    </div>
+    <div class="col-8">
+      	<ngx-scanner-qrcode #action="scanner" [config]="config" (event)="onEvent($event, action)"></ngx-scanner-qrcode>
+
+	 	<p *ngIf="action.isLoading">⌛ Loading...</p>
+
+		<button (click)="action.isStart ? action.stop() : action.start()" class="btn btn-primary">{{action.isStart ? 'Detener' : 'Escanear'}}</button> 
+    </div>
+  </div>
+</div>
+
+	
+
+
+
+

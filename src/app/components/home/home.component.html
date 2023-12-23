@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row" data-bs-theme="dark">
+    <div class="col-4">
+      <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
+      </div>
+    </div>
+    <div class="col-8">
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand">Lista de usuarios</a>
+              <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
+          </div>
+       </nav>
+      <table class="table table-bordered border-primary" style="overflow-x: hidden;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th *ngFor="let fecha of fechasSemana">{{ fecha | date:'yyyy-MM-dd' }}</th>
+            <th> Eliminar </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
+              <td>{{ usuario.name }}</td>
+              <td *ngFor="let fecha of momentfechas">
+                  {{ usuario.asistencia.includes(fecha) ? 'Asistió' : 'No Asistió' }}
+              </td>
+              <td class="text-center"><i class="fa-solid fa-trash-can" (click)="eliminarUsuario(usuario._id)"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+      

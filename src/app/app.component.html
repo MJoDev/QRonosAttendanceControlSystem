@@ -1,0 +1,26 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLinkActive="active" id='control'><img src="../assets/img/usm.png" alt="Logo" width="100" height="60" class="d-inline-block align-text-center"> Control de asistencia
+       </a>
+      
+      <ul class="navbar-nav ml-auto">
+        <ng-container *ngIf="!authService.loggedIn(); else loggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" (click)=authService.logOut()></a>
+          </li>
+        </ng-container>
+        <ng-template #loggedIn>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" (click)=authService.logOut() style="cursor: pointer">Cerrar sesion</a>
+          </li>
+        </ng-template>
+      </ul>
+      
+    </div>
+  </nav>
+</div>
+
+
+<router-outlet></router-outlet>
+

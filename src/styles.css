@@ -1,0 +1,16 @@
+#LogIn{
+	text-align: center;
+	padding: 400px;
+}
+body{
+	background: url('assets/img/pattern.png');
+}
+table{
+	overflow: hidden;
+   overflow-x:scroll;
+   width: 736px;
+   display:block;
+}
+#control{
+	text-align: right;
+}

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row" data-bs-theme="dark">
+    <div class="col-4">
+      <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
+      </div>
+    </div>
+    <div class="col-8">
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand">Lista de usuarios</a>
+              <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
+          </div>
+       </nav>
+      <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th *ngFor="let fecha of fechasAnuales">{{ fecha | date:'yyyy-MM' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
+              <td>{{ usuario.name }}</td>
+              <td *ngFor="let count of getAttendanceCountByMonth(usuario.asistencia)">{{ count }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
