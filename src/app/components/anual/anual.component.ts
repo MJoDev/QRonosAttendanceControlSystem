@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas';
 import moment from 'moment';
 
 @Component({
@@ -16,6 +18,7 @@ export class AnualComponent implements OnInit{
   fechasAnuales: string[] = [];
   fechasAnales: Date[] = [];
   usersWithAttendance: any[] = [];
+  fechaYear: string = "";
 
   constructor(private router: Router, 
     private usuarioService: UserService,
@@ -27,6 +30,7 @@ export class AnualComponent implements OnInit{
      // Obtén la fecha actual para determinar el año actual
       const fechaActual = new Date();
       const añoActual = fechaActual.getFullYear();
+      this.fechaYear = moment(fechaActual).format('YYYY-MM-DD');
 
       // Crea un arreglo de fechas desde el 1 de enero hasta el 31 de diciembre del año actual
       this.fechasAnales = Array.from({ length: 12 }, (_, i) => new Date(añoActual, i, 1));
@@ -83,6 +87,30 @@ export class AnualComponent implements OnInit{
     });
 
     return countByMonth;
+  }
+  imprimirLista(){
+    // Extraemos el
+    const DATA = document.getElementById('listaAnual')!;
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    html2canvas(DATA, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      // Add image Canvas to PDF
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`${new Date().toISOString()}.pdf`);
+    });
   }
 }
 

@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row" data-bs-theme="dark">
     <div class="col-4">
@@ -8,14 +9,15 @@
         <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-8"  id="listaAnual">
         <nav class="navbar bg-body-tertiary">
           <div class="container-fluid">
             <a class="navbar-brand">Lista de usuarios</a>
               <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
+            <a class="navbar-brand">Hoy es {{fechaYear | date:'dd-MM-yyyy'}}</a>
           </div>
        </nav>
-      <table class="table table-bordered border-primary">
+      <table class="table table-sm table-bordered border-primary table-hover">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -29,6 +31,8 @@
           </tr>
         </tbody>
       </table>
+      <div class="col-8">
+        <button class="btn btn-primary" (click)="imprimirLista()">Guardar PDF</button>
+      </div>
     </div>
 </div>
-<!--CAMBIO DESDE GITHUB-->

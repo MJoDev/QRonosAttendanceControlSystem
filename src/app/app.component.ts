@@ -8,7 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'control-de-asistencia';
-
   constructor( public authService: AuthService){
    
   }
