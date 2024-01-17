@@ -41,7 +41,10 @@ export class HomeComponent implements OnInit{
         
         //elimino a los usuarios que no tengan nombre(Admins)
         for(var i = 0; i < this.usuarios.length; i++){
-          if(this.usuarios[i].name == undefined){
+          if(this.usuarios[i].admin == true){
+            this.usuarios.splice(i, 1);
+          }
+          if(this.usuarios[i].mostrar == false){
             this.usuarios.splice(i, 1);
           }
          
@@ -92,7 +95,7 @@ export class HomeComponent implements OnInit{
     return momentfechas;
   }
    eliminarUsuario(id: any){
-    this.usuarioService.eliminarUsuario(id).subscribe(data => {
+    this.usuarioService.obtenerUsuarioPorId(id).subscribe(data => {
       this.obtenerUsuarios();
     }, error => {console.log(error)});
   }

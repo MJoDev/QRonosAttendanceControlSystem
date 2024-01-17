@@ -23,6 +23,6 @@ export class UserService {
     return this.http.get<Usuario>(url);
   }
   eliminarUsuario(id: string): Observable<any>{
-    return this.http.delete(this.url + id)
+    return this.http.get(this.url + id);
   }
 }

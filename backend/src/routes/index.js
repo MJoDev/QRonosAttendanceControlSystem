@@ -91,8 +91,9 @@ router.get('/usuarios', (req, res) => {
 });
 //Encontrar un usuario por ID
 router.get('/usuarios/:id', (req, res) => {
+  let update = {mostrar: false};
   const usuarioId = req.params.id;
-  User.findById(usuarioId)
+  User.findByIdAndUpdate(usuarioId, update, {new: true})
     .then((usuario) => {
       if (!usuario) {
         return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -104,15 +105,14 @@ router.get('/usuarios/:id', (req, res) => {
     });
 });
 
-router.delete('/delete/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
 	try{
 		let user = await User.findById(req.params.id);
 
 		if(!user){
 			res.status(404).json({msg: 'No existe el user'});
 		}
-		await User.findOneAndDelete({_id: req.params.id});
-		res.json({msg: 'El objeto ha sido eliminado'});
+		user.mostrar = false;
 		//asdasasd
 
 

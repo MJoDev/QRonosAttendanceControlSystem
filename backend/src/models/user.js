@@ -5,6 +5,7 @@ const userSchema = Schema({
 	user: String,
 	password: String,
 	admin: Boolean,
+	mostrar: Boolean,
 	asistencia: [{
     type: Date,
     default: []
