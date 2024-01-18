@@ -22,6 +22,7 @@ import { AnualComponent } from './components/anual/anual.component';
 import { IncrementarPipe } from './components/anual/incrementar.pipe';
 import { MensualComponent } from './components/mensual/mensual.component';
 import { UsersComponent } from './components/users/users.component';
+import { PeriodosComponent } from './components/periodos/periodos.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { UsersComponent } from './components/users/users.component';
     AnualComponent,
     IncrementarPipe,
     MensualComponent,
-    UsersComponent
+    UsersComponent,
+    PeriodosComponent
   ],
   imports: [
     BrowserModule,
