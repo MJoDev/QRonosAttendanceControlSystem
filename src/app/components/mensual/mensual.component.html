@@ -21,13 +21,8 @@
         <table class="table table-bordered border-primary table-hover">
           <thead>
             <tr>
-              <th>
-              </th>
-              <th *ngFor="let nombre of NombreDiasSemana">{{nombre}}</th>
-            </tr>
-            <tr>
               <th>Nombre</th>
-              <th *ngFor="let fecha of fechasSemana">{{ fecha | date:'dd-MM' }}</th>
+              <th *ngFor="let item of datesOfMonthWithDay" class="text-center"> {{ item.date | date:'dd/MM/yyyy' }} - {{ item.dayOfWeek }}</th>
             </tr>
           </thead>
           <tbody>

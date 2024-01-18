@@ -19,6 +19,7 @@ export class MensualComponent implements OnInit{
     fechaYear: string = "";
     filtroNombre: string = '';
     NombreDiasSemana: string[] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+    datesOfMonthWithDay: { date: Date; dayOfWeek: string }[] = this.getDatesOfMonthWithDay();
 
     constructor(
     private router: Router, 
@@ -117,5 +118,28 @@ export class MensualComponent implements OnInit{
       }).then((docResult) => {
         docResult.save(`${new Date().toISOString()}.pdf`);
       });
+    }
+    getDatesOfMonthWithDay(): { date: Date; dayOfWeek: string }[] {
+      const currentDate = new Date();
+      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    
+      const datesArray: { date: Date; dayOfWeek: string }[] = [];
+      let currentDatePointer = firstDayOfMonth;
+    
+      while (currentDatePointer <= lastDayOfMonth) {
+        datesArray.push({
+          date: new Date(currentDatePointer),
+          dayOfWeek: this.getDayOfWeek(currentDatePointer.getDay()),
+        });
+        currentDatePointer.setDate(currentDatePointer.getDate() + 1);
+      }
+    
+      return datesArray;
+    }
+    
+    getDayOfWeek(dayIndex: number): string {
+      const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      return daysOfWeek[dayIndex];
     }
 }

@@ -86,11 +86,6 @@ router.get('/usuarios', (req, res) => {
 
   User.find()
     .then((usuarios) => {
-	  for(var i = 0; i < usuarios.length; i++){
-		if(usuarios[i].mostrar == false){
-			usuarios.splice(i, 1)
-		}
-	  }
       res.status(200).json(usuarios);
     })
     .catch((error) => {
