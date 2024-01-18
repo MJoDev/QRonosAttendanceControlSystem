@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit{
             localStorage.setItem('token', res.token);
             if (res.isAdmin){
               localStorage.setItem('admin', 'true');
-              this.router.navigate(['/home']);
+              this.router.navigate(['/users']);
             }
             else{
               localStorage.setItem('QRCODE', this.QrInfor);
