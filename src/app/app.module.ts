@@ -20,6 +20,7 @@ import { ScannerComponent } from './components/scanner/scanner.component';
 import { FiltroPipe } from './components/home/filtro.pipe';
 import { AnualComponent } from './components/anual/anual.component';
 import { IncrementarPipe } from './components/anual/incrementar.pipe';
+import { MensualComponent } from './components/mensual/mensual.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { IncrementarPipe } from './components/anual/incrementar.pipe';
     ScannerComponent,
     FiltroPipe,
     AnualComponent,
-    IncrementarPipe
+    IncrementarPipe,
+    MensualComponent
   ],
   imports: [
     BrowserModule,

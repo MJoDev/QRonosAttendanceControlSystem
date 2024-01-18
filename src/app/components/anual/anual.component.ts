@@ -19,6 +19,9 @@ export class AnualComponent implements OnInit{
   fechasAnales: Date[] = [];
   usersWithAttendance: any[] = [];
   fechaYear: string = "";
+  fechasNombres: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                            'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre',
+                            'Noviembre', 'Diciembre'];
 
   constructor(private router: Router, 
     private usuarioService: UserService,
@@ -46,7 +49,10 @@ export class AnualComponent implements OnInit{
         this.usuarios = obtenerUsuarios;
         //elimino a los usuarios que no tengan nombre(Admins)
         for(var i = 0; i < this.usuarios.length; i++){
-          if(this.usuarios[i].name == undefined){
+          if(this.usuarios[i].admin == true){
+            this.usuarios.splice(i, 1);
+          }
+          if(this.usuarios[i].mostrar == false){
             this.usuarios.splice(i, 1);
           }
          }

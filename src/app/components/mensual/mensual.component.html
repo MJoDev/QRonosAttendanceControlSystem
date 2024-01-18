@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row" data-bs-theme="dark">
+      <div class="col-4">
+        <div id="list-example" class="list-group">
+          <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
+        </div>
+      </div>
+      <div class="col-8" id="listaSemanal">
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand">Lista de usuarios</a>
+                <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
+              <a class="navbar-brand">Hoy es {{fechaYear | date:'dd-MM-yyyy'}}</a>
+            </div>
+         </nav>
+        <table class="table table-bordered border-primary table-hover">
+          <thead>
+            <tr>
+              <th>
+              </th>
+              <th *ngFor="let nombre of NombreDiasSemana">{{nombre}}</th>
+            </tr>
+            <tr>
+              <th>Nombre</th>
+              <th *ngFor="let fecha of fechasSemana">{{ fecha | date:'dd-MM' }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
+                <td>{{ usuario.name }}</td>
+                <td *ngFor="let fecha of momentfechas">
+                    {{ usuario.asistencia.includes(fecha) ? 'Asistió' : 'No Asistió' }}
+                </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-8">
+          <button class="btn btn-primary" (click)="imprimirLista()">Guardar PDF</button>
+        </div>
+      </div>
+  </div>
+  

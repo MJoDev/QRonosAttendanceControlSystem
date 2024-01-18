@@ -11,6 +11,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { AnualComponent } from './components/anual/anual.component';
+import { MensualComponent } from './components/mensual/mensual.component';
+
 
 
 import { AuthGuard } from './auth.guard';
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuardAdmin]},
   {path: 'scanner', component: ScannerComponent, canActivate: [AuthGuardAdmin]},
   {path: 'anual', component: AnualComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'mensual', component: MensualComponent, canActivate: [AuthGuardAdmin]},
   {path: '**', component: ErrorComponent},
 ];
 

@@ -5,6 +5,7 @@
       <div id="list-example" class="list-group">
         <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
       </div>
@@ -17,11 +18,11 @@
             <a class="navbar-brand">Hoy es {{fechaYear | date:'dd-MM-yyyy'}}</a>
           </div>
        </nav>
-      <table class="table table-sm table-bordered border-primary table-hover">
+      <table class="table table-bordered border-primary table-hover">
         <thead>
           <tr>
             <th>Nombre</th>
-            <th *ngFor="let fecha of fechasAnuales">{{ fecha | date:'yyyy-MM' }}</th>
+            <th *ngFor="let fecha of fechasNombres" >{{ fecha }}</th>
           </tr>
         </thead>
         <tbody>
