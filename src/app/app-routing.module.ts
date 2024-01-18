@@ -13,6 +13,7 @@ import { ScannerComponent } from './components/scanner/scanner.component';
 import { AnualComponent } from './components/anual/anual.component';
 import { MensualComponent } from './components/mensual/mensual.component';
 import { UsersComponent } from './components/users/users.component';
+import { PeriodosComponent } from './components/periodos/periodos.component';
 
 
 
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   {path: 'anual', component: AnualComponent, canActivate: [AuthGuardAdmin]},
   {path: 'mensual', component: MensualComponent, canActivate: [AuthGuardAdmin]},
   {path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'periodos', component: PeriodosComponent, canActivate: [AuthGuardAdmin]},
   {path: '**', component: ErrorComponent},
 ];
 

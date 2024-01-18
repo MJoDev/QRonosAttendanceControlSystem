@@ -1,1 +1,53 @@
-<p>periodos works!</p>
+<div class="container">
+    <div class="row" data-bs-theme="dark">
+      <div class="col-4">
+        <div id="list-example" class="list-group">
+          <a class="list-group-item list-group-item-action" [routerLink]="['/users']">Usuarios</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/semanal']">Semanal</a>
+              <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/periodos']">Periodos</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
+        </div>
+      </div>
+      <div class="col-8" id="listaSemanal">
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand">Lista de usuarios</a>
+                <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
+              <a class="navbar-brand">Hoy es {{fechaYear | date:'dd-MM-yyyy'}}</a>
+            </div>
+         </nav>
+        <table class="table table-bordered border-primary table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th *ngFor="let fecha of fechasEnRango" class="text-center"> {{ fecha | date:'dd/MM/yyyy' }} - {{ obtenerDiaSemana(fecha)}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
+                <td>{{ usuario.name }}</td>
+                <td *ngFor="let fecha of momentfechas"  class="text-center">
+                    {{ usuario.asistencia.includes(fecha) ? 'Asistió' : 'No Asistió' }}
+                </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-8">
+            <div>
+                Fecha de inicio
+                <input type="date" [(ngModel)]="rangoInicio">
+            </div>
+            <div>
+                Fecha final
+                <input type="date" [(ngModel)]="rangoFin"class="mt-2 mb-2">
+            </div>
+            <button (click)="generarFechas()" class="btn btn-primary mb-3">Generar Fechas</button>
+        </div>
+        <div class="col-8">
+            <button class="btn btn-primary" (click)="imprimirLista()">Guardar PDF</button>
+        </div>
+      </div>
+  </div>

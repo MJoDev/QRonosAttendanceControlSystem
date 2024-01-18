@@ -49,7 +49,7 @@ import { PeriodosComponent } from './components/periodos/periodos.component';
     ReactiveFormsModule,
     HttpClientModule,
     QRCodeModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
   ],
   providers: [
     appRoutingProviders,
