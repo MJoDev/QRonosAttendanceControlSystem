@@ -12,6 +12,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { AnualComponent } from './components/anual/anual.component';
 import { MensualComponent } from './components/mensual/mensual.component';
+import { UsersComponent } from './components/users/users.component';
+
 
 
 
@@ -20,13 +22,14 @@ import { AuthGuardAdmin } from './auth.guard.admin';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'semanal', component: HomeComponent, canActivate: [AuthGuardAdmin]},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent, canActivate: [AuthGuardAdmin]},
   {path: 'scanner', component: ScannerComponent, canActivate: [AuthGuardAdmin]},
   {path: 'anual', component: AnualComponent, canActivate: [AuthGuardAdmin]},
   {path: 'mensual', component: MensualComponent, canActivate: [AuthGuardAdmin]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuardAdmin]},
   {path: '**', component: ErrorComponent},
 ];
 

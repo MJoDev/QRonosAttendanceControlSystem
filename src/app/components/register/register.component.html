@@ -2,9 +2,10 @@
   <div class="row" data-bs-theme="dark">
     <div class="col-4">
       <div id="list-example" class="list-group">
-        <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
-        <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/users']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/semanal']">Semanal</a>
 		<a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
       </div>
@@ -22,6 +23,13 @@
 				 	 			El nombre es obligatorio
 				 	 		</div>
 						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Cedula</label>
+							<input formControlName="cedula" [class.is-invalid]="f.user.errors && f.user.touched" type="number" class="form-control" id="exampleFormControlInput1" placeholder="Ingresa la cedula">
+							<div id="validationServerUsernameFeedBack" class="invalid-feedback">
+								El nombre es obligatorio
+							</div>
+					 	</div>
 						<div class="mb-3">
 				 	 		<label for="exampleFormControlInput1" class="form-label">Usuario</label>
 				 	 		<input formControlName="user" [class.is-invalid]="f.user.errors && f.user.touched" type="user" class="form-control" id="exampleFormControlInput1" placeholder="Ingresa el usuario">

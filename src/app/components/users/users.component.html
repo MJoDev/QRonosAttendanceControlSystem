@@ -4,38 +4,36 @@
         <div id="list-example" class="list-group">
           <a class="list-group-item list-group-item-action" [routerLink]="['/users']">Usuarios</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/semanal']">Semanal</a>
-          <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
+              <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
         </div>
       </div>
       <div class="col-8" id="listaSemanal">
-          <nav class="navbar bg-body-tertiary">
+        <nav class="navbar bg-body-tertiary ml-5" id="navs">
             <div class="container-fluid">
               <a class="navbar-brand">Lista de usuarios</a>
                 <input class="form-control me-2" type="text" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" aria-label="Search">  
-              <a class="navbar-brand">Hoy es {{fechaYear | date:'dd-MM-yyyy'}}</a>
             </div>
          </nav>
-        <table class="table table-bordered border-primary table-hover">
+        <table class="table table-bordered border-primary table-hover" style="overflow-x: hidden;">
           <thead>
             <tr>
-              <th>
-              </th>
-              <th *ngFor="let nombre of NombreDiasSemana">{{nombre}}</th>
-            </tr>
-            <tr>
               <th>Nombre</th>
-              <th *ngFor="let fecha of fechasSemana">{{ fecha | date:'dd-MM' }}</th>
+              <th>Usuario</th>
+              <th>Cedula</th>
+              <th>Total de asistencias</th>
+              <th> Eliminar </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
                 <td>{{ usuario.name }}</td>
-                <td *ngFor="let fecha of momentfechas">
-                    {{ usuario.asistencia.includes(fecha) ? 'Asistió' : 'No Asistió' }}
-                </td>
+                <td>{{ usuario.user }}</td>
+                <td>{{ usuario.cedula }}</td>
+                <td *ngFor="let count of getAttendanceCount(usuario.asistencia)" class="text-center">{{ count }}</td>
+                <td class="text-center"><i class="fa-solid fa-trash-can" (click)="eliminarUsuario(usuario._id)"></i></td>
             </tr>
           </tbody>
         </table>
@@ -44,4 +42,3 @@
         </div>
       </div>
   </div>
-  

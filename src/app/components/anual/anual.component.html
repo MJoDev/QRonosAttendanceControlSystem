@@ -3,9 +3,10 @@
   <div class="row" data-bs-theme="dark">
     <div class="col-4">
       <div id="list-example" class="list-group">
-        <a class="list-group-item list-group-item-action" [routerLink]="['/home']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/users']">Usuarios</a>
+        <a class="list-group-item list-group-item-action" [routerLink]="['/semanal']">Semanal</a>
+		    <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
-        <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
         <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
       </div>
@@ -28,7 +29,7 @@
         <tbody>
           <tr *ngFor="let usuario of usuarios | filtro:filtroNombre">
               <td>{{ usuario.name }}</td>
-              <td *ngFor="let count of getAttendanceCountByMonth(usuario.asistencia)">{{ count }}</td>
+              <td *ngFor="let count of getAttendanceCountByMonth(usuario.asistencia)" class="text-center">{{ count }}</td>
           </tr>
         </tbody>
       </table>

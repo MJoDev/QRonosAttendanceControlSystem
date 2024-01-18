@@ -28,7 +28,9 @@ export class RegisterComponent implements OnInit {
       name: ['', Validators.required],
       user:['', Validators.required],
       password:['', Validators.required],
-      admin: false
+      cedula:['', Validators.required],
+      admin: false,
+      mostrar: true,
     });
   }
   public submitForm(){
@@ -44,6 +46,7 @@ export class RegisterComponent implements OnInit {
       
       if(this.myForm.value.admin == true){
         this.myForm.value.name = undefined;
+        this.myForm.value.mostrar = false;
       }
       console.log(this.myForm.value);
 

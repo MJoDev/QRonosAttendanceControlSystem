@@ -4,6 +4,7 @@ const userSchema = Schema({
 	name: String,
 	user: String,
 	password: String,
+	cedula: String,
 	admin: Boolean,
 	mostrar: Boolean,
 	asistencia: [{

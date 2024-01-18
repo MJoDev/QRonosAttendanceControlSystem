@@ -3,6 +3,7 @@ export interface Usuario {
   user: String;
   password: String;
   mostrar: Boolean;
+  cedula: String;
   admin: Boolean;
   asistencia: Date[];
 }

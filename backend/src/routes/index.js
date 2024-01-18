@@ -16,11 +16,12 @@ const jwt = require('jsonwebtoken');
 //Creo la ruta de registro
 router.post('/register', async (req, res) => {
 	//Recibe por medio de un metodo post el nombre, el usuario, la contrase;a y si es admin o no
-	const { name, user, password, admin } = req.body;
+	const { name, user, password, cedula, mostrar, admin } = req.body;
 	//crea el nuevo usuario en base al modelo del usuario
-	const newUser = new User({name, user, password, admin});
+	const newUser = new User({name, user, password, cedula, mostrar, admin});
 	//guardarlo en la base de datos
 	await newUser.save();
+
 
 	//asignarle un token
 	const token = jwt.sign({_id: newUser._id}, 'secretkey');
