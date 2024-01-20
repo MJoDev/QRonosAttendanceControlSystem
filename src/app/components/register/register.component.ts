@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
               .subscribe(
                 res => {console.log(res);
                   localStorage.setItem('token', res.token); alert('El usuario ha sido creado');},
-                err => {console.log(err)}
+                err => {console.log(err); alert('Ha ocurrido un error, el usuario, el nombre y la cedula deben ser unicos. Por favor, verifica tu informacion')}
               )
           }
          )    

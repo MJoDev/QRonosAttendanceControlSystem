@@ -4,9 +4,9 @@
         <div id="list-example" class="list-group">
           <a class="list-group-item list-group-item-action" [routerLink]="['/users']">Usuarios</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/semanal']">Semanal</a>
-              <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/mensual']">Mensual</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/anual']">Anual</a>
-          <a class="list-group-item list-group-item-action" [routerLink]="['/periodos']">Periodos</a>
+          <a class="list-group-item list-group-item-action" [routerLink]="['/periodos']">Periodos y Reportes</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/register']">Crear nuevo usuario</a>
           <a class="list-group-item list-group-item-action" [routerLink]="['/scanner']">Escanear</a>
         </div>
@@ -44,10 +44,18 @@
                 Fecha final
                 <input type="date" [(ngModel)]="rangoFin"class="mt-2 mb-2">
             </div>
-            <button (click)="generarFechas()" class="btn btn-success mb-3">Generar Fechas</button>
+            <label>
+              Omitir fin de semana
+              <input type="checkbox" class="mb-2"  [(ngModel)]="omitirFinDeSemana">
+            </label>
+            <button (click)="generarFechas()" class="btn btn-success mb-3 mx-2">Generar Fechas</button>
         </div>
-        <div class="col-8">
+        
+        <div class="col-8 mb-3">
             <button class="btn btn-primary" (click)="imprimirLista()">Guardar PDF</button>
         </div>
+        <div class="col-8">
+          <button class="btn btn-info" (click)="generarPDF()">Generar Reporte</button>
+      </div>
       </div>
   </div>

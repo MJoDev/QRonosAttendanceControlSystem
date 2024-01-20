@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { jsPDF } from "jspdf";
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import moment from 'moment';
 
@@ -11,9 +13,10 @@ import moment from 'moment';
   templateUrl: './periodos.component.html',
   styleUrls: ['./periodos.component.css']
 })
+
 export class PeriodosComponent implements OnInit {
 
-    NombreDelDia: { fecha: Date; diaSemana: string }[] = [];
+    
     rangoInicio: string = '';
     rangoFin: string = '';
     fechasEnRango: Date[] = [];
@@ -21,6 +24,7 @@ export class PeriodosComponent implements OnInit {
      fechaYear: string = "";
      filtroNombre: string = '';
      momentfechas: string[] = [];
+    omitirFinDeSemana: boolean = false;
 
     constructor(private router: Router, 
     private usuarioService: UserService,
@@ -56,29 +60,33 @@ export class PeriodosComponent implements OnInit {
 
     generarFechas() {
       const fechasEnRango = [];
-
+      const momentfechas = [];
+    
       const fechaInicio = new Date(this.rangoInicio);
       const fechaFin = new Date(this.rangoFin);
-  
+    
+      // Verificar si rangoInicio es un string válido
+      if (isNaN(fechaInicio.getTime())) {
+        console.error("Error: rangoInicio no es una fecha válida.");
+        return;
+      }
+    
       // Hacemos una copia para no afectar la fecha original
       const fechaActual = new Date(fechaInicio);
-  
+    
       while (fechaActual <= fechaFin) {
+        if (!this.omitirFinDeSemana || (fechaActual.getDay() !== 0 && fechaActual.getDay() !== 6)) {
+          fechasEnRango.push(new Date(fechaActual.getTime()));
+        }
         fechaActual.setDate(fechaActual.getDate() + 1);
-        fechasEnRango.push(new Date(fechaActual));
-        this.NombreDelDia.push({
-          fecha: new Date(fechaActual),
-          diaSemana: this.obtenerDiaSemana(fechaActual),
-      });
       }
-
-      const momentfechas = [];
-  
-      for(var i = 0; i < fechasEnRango.length; i++){
+    
+      for (let i = 0; i < fechasEnRango.length; i++) {
         const nuevaFecha = moment(fechasEnRango[i]).format('YYYY-MM-DD');
-        var proposedDate = nuevaFecha + "T00:00:00.000Z";
+        const proposedDate = nuevaFecha + "T00:00:00.000Z";
         momentfechas.push(proposedDate);
       }
+    
       this.fechasEnRango = fechasEnRango;
       this.momentfechas = momentfechas;
     }
@@ -112,4 +120,51 @@ export class PeriodosComponent implements OnInit {
         docResult.save(`${new Date().toISOString()}.pdf`);
       });
     }
+    
+    //REPORTES
+    generarPDF() {
+      const pdf = new jsPDF() as jsPDFCustom;
+
+      // Crear array de datos para la tabla
+      const data = this.usuarios.map(usuario => [
+        usuario.name,
+        this.obtenerTotalAsistencias(usuario.asistencia),
+        this.obtenerTotalInasistencias(usuario.asistencia)
+      ]);
+      pdf.text(`Reporte de ${this.rangoInicio}` + ` Hasta ${this.rangoFin}`, 10, 40);
+      if(this.omitirFinDeSemana){
+        pdf.text(`Se estan omitiendo los fines de semana`, 10, 50);
+      }
+      // Agregar encabezados de la tabla
+      const headers = ['Usuario', 'Total Asistencias', 'Total Inasistencias'];
+  
+      // Crear la tabla en el PDF
+      pdf.autoTable({
+        head: [headers],
+        body: data,
+        startY: 10,
+      });
+      // Guardar el PDF
+      pdf.save('reporte_asistencias_usuarios_desde_' + this.rangoInicio + '_hasta_' + this.rangoFin +'.pdf' );
+    }
+
+    obtenerTotalInasistencias(asistencia: string[]): number {
+      return this.momentfechas
+        .filter(fecha => !asistencia.some(asist => this.compararFechas(asist, fecha)))
+        .length;
+    }
+  
+    obtenerTotalAsistencias(asistencia: string[]): number {
+      return asistencia.length;
+    }
+  
+    compararFechas(fecha1: string, fecha2: string): boolean {
+      // Función de comparación de fechas, ajusta según tus necesidades
+      return fecha1 === fecha2;
+    }
+    
+}
+
+interface jsPDFCustom extends jsPDF {
+  autoTable: (options: UserOptions) => void;
 }

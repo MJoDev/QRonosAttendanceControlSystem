@@ -3,7 +3,7 @@
 	padding: 400px;
 }
 body{
-	background: url('assets/img/pattern.png');
+	background-image: url('assets/img/pattern.png');
 }
 table{
 	overflow: hidden;

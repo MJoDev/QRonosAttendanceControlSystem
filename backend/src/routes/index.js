@@ -18,6 +18,21 @@ router.post('/register', async (req, res) => {
 	//Recibe por medio de un metodo post el nombre, el usuario, la contrase;a y si es admin o no
 	const { name, user, password, cedula, mostrar, admin } = req.body;
 	//crea el nuevo usuario en base al modelo del usuario
+	const existingCedula = await User.findOne({ cedula });
+	const existingUser = await User.findOne({ user });
+	const existingName = await User.findOne({ name });
+
+    if (existingCedula) {
+      return res.status(400).json({ error: 'La cédula ya existe. Debe ser única.' });
+    }
+	if (existingUser) {
+		return res.status(400).json({ error: 'El Usuario ya existe. Debe ser único.' });
+	}
+	if (existingName) {
+		return res.status(400).json({ error: 'El Nombre ya existe. Debe ser único.' });
+	}
+
+
 	const newUser = new User({name, user, password, cedula, mostrar, admin});
 	//guardarlo en la base de datos
 	await newUser.save();
