@@ -124,6 +124,11 @@ export class PeriodosComponent implements OnInit {
     //REPORTES
     generarPDF() {
       const pdf = new jsPDF() as jsPDFCustom;
+      pdf.text(`Reporte de ${this.rangoInicio}` + ` Hasta ${this.rangoFin}`, 20, 20);
+      if(this.omitirFinDeSemana){
+        pdf.text(`Se estan omitiendo los fines de semana`, 30, 30);
+      }
+      
 
       // Crear array de datos para la tabla
       const data = this.usuarios.map(usuario => [
@@ -131,10 +136,6 @@ export class PeriodosComponent implements OnInit {
         this.obtenerTotalAsistencias(usuario.asistencia),
         this.obtenerTotalInasistencias(usuario.asistencia)
       ]);
-      pdf.text(`Reporte de ${this.rangoInicio}` + ` Hasta ${this.rangoFin}`, 10, 40);
-      if(this.omitirFinDeSemana){
-        pdf.text(`Se estan omitiendo los fines de semana`, 10, 50);
-      }
       // Agregar encabezados de la tabla
       const headers = ['Usuario', 'Total Asistencias', 'Total Inasistencias'];
   
@@ -142,10 +143,47 @@ export class PeriodosComponent implements OnInit {
       pdf.autoTable({
         head: [headers],
         body: data,
-        startY: 10,
+        startY: 40,
       });
+      
       // Guardar el PDF
       pdf.save('reporte_asistencias_usuarios_desde_' + this.rangoInicio + '_hasta_' + this.rangoFin +'.pdf' );
+    }
+
+    generarPDFUsuario(nombreUsuario: string) {
+      const pdf = new jsPDF() as jsPDFCustom;
+
+      // Encontrar el usuario por nombre
+      const usuario = this.usuarios.find(u => u.name === nombreUsuario);
+      pdf.text(`Reporte de ${this.rangoInicio}` + ` Hasta ${this.rangoFin}`, 20, 20);
+      if(this.omitirFinDeSemana){
+        pdf.text(`Se estan omitiendo los fines de semana`, 30, 30);
+      }
+  
+      if (usuario) {
+        // Crear array de datos para la tabla
+        const data = [
+          ['Usuario', 'Total Asistencias', 'Total Inasistencias'],
+          [usuario.name, this.obtenerTotalAsistencias(usuario.asistencia), this.obtenerTotalInasistencias(usuario.asistencia)]
+        ];
+  
+        // Agregar encabezados de la tabla
+        const headers = data.slice(0, 1);
+  
+        // Agregar la tabla al PDF
+        pdf.autoTable({
+          head: headers,
+          body: data.slice(1),
+          startY: 40,
+        });
+  
+        // Guardar el PDF
+        pdf.save('reporte_asistencias_usuario_' + nombreUsuario + '_desde_' + this.rangoInicio + '_hasta_' + this.rangoFin +'.pdf' );
+      } else {
+        console.error(`Usuario '${nombreUsuario}' no encontrado.`);
+      }
+      // Guardar el PDF
+      
     }
 
     obtenerTotalInasistencias(asistencia: string[]): number {
@@ -155,8 +193,12 @@ export class PeriodosComponent implements OnInit {
     }
   
     obtenerTotalAsistencias(asistencia: string[]): number {
-      return asistencia.length;
+      return this.momentfechas
+        .filter(fecha => asistencia.some(asist => this.compararFechas(asist, fecha)))
+        .length;
     }
+  
+  
   
     compararFechas(fecha1: string, fecha2: string): boolean {
       // Función de comparación de fechas, ajusta según tus necesidades
