@@ -1,4 +1,4 @@
-# Control De Asistencia
+<h1 align="center">QRonos Attendance Control System</h1>
 
 Project made in Angular to control attendance with QR
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
