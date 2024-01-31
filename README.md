@@ -12,7 +12,7 @@ Run `npm install` in the backend folder.  <br>
 Run `npm start` for a dev server in the backend folder. Navigate to `http://localhost:4200/`.  <br>
 Run `ng serve` for a dev server in the main folder. Navigate to `http://localhost:4200/`.  <br>
 
-## Technologies-used
+## Technologies used
 
 * `Angular`  <br>
 * `Typescript`  <br>
