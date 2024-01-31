@@ -13,6 +13,8 @@ Run `npm start` for a dev server in the backend folder. Navigate to `http://loca
 Run `ng serve` for a dev server in the main folder. Navigate to `http://localhost:4200/`. 
 
 ## Technologies-used
+
+- `Funcionalidad 1` - `Funcionalidad 2`: descripción de la funcionalidad 2- `Funcionalidad 2a`: descripción de la funcionalidade 2a relacionada con la funcionalidad 2- `Funcionalidad 3`: descripción de la funcionalidad 3
 ** Angular
 *Typescript
 *HTML
