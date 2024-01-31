@@ -14,14 +14,14 @@ Run `ng serve` for a dev server in the main folder. Navigate to `http://localhos
 
 ## Technologies-used
 
-** Angular  <br>
-*Typescript  <br>
-*HTML  <br>
-*CSS  <br>
-*Bootstrap  <br>
-*NodeJs  <br>
-*MongoDB  <br>
-*Moongoose  <br>
-*Nodemon  <br>
-*ExpressJs  <br>
+* `Angular`  <br>
+* `Typescript`  <br>
+* `HTML`  <br>
+* `CSS`  <br>
+* `Bootstrap`  <br>
+* `NodeJs`  <br>
+* `MongoDB`  <br>
+* `Moongoose`  <br>
+* `Nodemon`  <br>
+* `ExpressJs`  <br>
 
