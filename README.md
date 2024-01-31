@@ -9,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `npm install` in the main folder. <br>
 Run `npm install` in the backend folder.  <br>
-Run `npm start` for a dev server in the backend folder. Navigate to `http://localhost:4200/`.  <br>
+Run `npm start` for a dev server in the backend folder. <br>
 Run `ng serve` for a dev server in the main folder. Navigate to `http://localhost:4200/`.  <br>
 
 ## Technologies used
